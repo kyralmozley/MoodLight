@@ -13,12 +13,13 @@ def controlHue(emotion):
         'fear': {"on": True, "bri": 254, "hue": 64571, "sat": 253},         #red
         'anticipation': {"on": True, "bri": 254, "hue": 15974, "sat": 252}, #orange
         'surprise': {"on":True,"bri":254,"hue":49657,"sat":245},            #purple
-        'sadness': {"on": True, "bri": 254, "hue": 19912, "sat": 252},      #dark blue
+        'sadness': {"on": True,"bri": 254,"hue": 45258,"sat": 252},         #blue
         'joy': {"on": True, "bri": 254, "hue": 19912, "sat": 252},          #yellow
         'disgust': {"on": True, "bri": 254, "hue": 46624, "sat": 251},      #green
-        'negative': {"on": True, "bri": 254, "hue": 19912, "sat": 252},     #blue
+        'negative':  {"on": True,"bri": 254,"hue": 47032,"sat": 251},       #dark blue
         'positive': {"on": True, "bri": 254, "hue": 33016, "sat": 53}       #white
     }
 
     setting = settingsDir.get(emotion)
     r = requests.put(url, json.dumps(setting), timeout=5)
+

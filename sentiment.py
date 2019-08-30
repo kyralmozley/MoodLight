@@ -1,9 +1,10 @@
 # I am using NRC Word-Emotion Association Lexicon (NRC Emotion Lexicon)
-#defines the following emotions: anger, fear, anticipation, trust, surprise, sadness, joy, and disgust
+#defines the following emotions: anger, fear, anticipation, surprise, sadness, joy, and disgust
 #as well as negative or positive
 
 filepath = 'Emotion-Lexicon.txt'
 lexiconDic = {}
+
 
 #create a dictionary of words to emotion
 with open(filepath) as fp:
@@ -11,7 +12,12 @@ with open(filepath) as fp:
    while line:
        if not (line.__contains__('0')) and not (line.__contains__('trust')):
            lexicon = line.split()
-           lexiconDic[lexicon[0]] = lexicon[1]
+
+           #multiple words have multiple emotions, need to add in as a list
+           if(lexiconDic.__contains__(lexicon[0])):
+               lexiconDic[lexicon[0]] = lexiconDic.get(lexicon[0]) + [lexicon[1]]
+           else:
+               lexiconDic[lexicon[0]] = [lexicon[1]]
        line = fp.readline()
 
 
@@ -24,13 +30,14 @@ def getSentiment(tweet):
     #split tweet into tokens
     tokens = tweet.split()
     for token in tokens:
-        if token in lexiconDic:     #if token exists in diectionary, get its emotion and add to emotion dic
+        if token in lexiconDic:
+            #if token exists in diectionary, get its emotion and add to emotion dic
             emotion = lexiconDic.get(token)
-            emotions[emotion] = emotions.get(emotion) + 1
-    emotion = max(emotions, key=emotions.get) #the emotion for this tweet is the most common
+            for e in emotion:
+                emotions[e] = emotions.get(e) + 1
 
-    #this solves an issue where, if no tokens in tweet are in dic, then all = 0 so would be assigned anger
-    if emotion == 'anger' and emotions['anger'] == 0:
-        return ''
-    else:
-        return emotion
+    emotion = [k for k, v in emotions.items() if v == max(emotions.values())]
+    return emotion
+    #the emotion for this tweet is the most common
+
+
