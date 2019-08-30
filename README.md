@@ -23,3 +23,7 @@ The top emotion corrolates to which colour the Philips Hue changes to:
 | Negative      | Blue     |
 | Postitive     | White    |
 
+### TODO
+- [ ] Add emoji analysis
+- [ ] Find/Generate lexicon with more current/slang/topical words in (e.g. Brexit, fetch)
+- [ ] Deal with negation (e.g. Not Happy, where as currently get Happy)
